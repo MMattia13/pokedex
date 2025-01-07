@@ -8,45 +8,43 @@ public class PokemonListDao {
 
     private Connection connection = DatabaseConnection.getInstance().getConnection();
 
-    public PokemonList insertPokemonListOwned(PokemonList pokemonList) {
+    public void insertPokemonListOwned(String pokemonid , String userid) {
 
         String insertPokemonListSQL = "INSERT INTO public.pokemon_list(\n" +
-                "\tid, id_pokemon, id_utente, state)\n" +
-                "\tVALUES (?, ?, ?, ?::PokemonState);";
+                "\t id_pokemon, id_utente, state)\n" +
+                "\tVALUES ( ?, ?, ?::PokemonState);";
 
         try {
             PreparedStatement psInsertPokemonList = connection.prepareStatement(insertPokemonListSQL);
-            psInsertPokemonList.setString(1, pokemonList.getId().toString());
-            psInsertPokemonList.setString(2, pokemonList.getPokemon().toString());
-            psInsertPokemonList.setString(3, pokemonList.getUser().toString());
-            psInsertPokemonList.setString(4, "owned");
+            psInsertPokemonList.setString(1, pokemonid);
+            psInsertPokemonList.setString(2, userid);
+            psInsertPokemonList.setString(3, "owned");
 
             psInsertPokemonList.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return pokemonList;
+
     }
-    public PokemonList insertPokemonListWanted(PokemonList pokemonList) {
+    public void insertPokemonListWanted(String pokemonid , String userid) {
 
         String insertPokemonListSQL = "INSERT INTO public.pokemon_list(\n" +
-                "\tid, id_pokemon, id_utente, state)\n" +
-                "\tVALUES (?, ?, ?, ?::PokemonState);";
+                "\t id_pokemon, id_utente, state)\n" +
+                "\tVALUES ( ?, ?, ?::PokemonState);";
 
         try {
             PreparedStatement psInsertPokemonList = connection.prepareStatement(insertPokemonListSQL);
-            psInsertPokemonList.setString(1, pokemonList.getId().toString());
-            psInsertPokemonList.setString(2, pokemonList.getPokemon().toString());
-            psInsertPokemonList.setString(3, pokemonList.getUser().toString());
-            psInsertPokemonList.setString(4, "wanted");
+            psInsertPokemonList.setString(1, pokemonid);
+            psInsertPokemonList.setString(2,userid);
+            psInsertPokemonList.setString(3, "wanted");
 
             psInsertPokemonList.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return pokemonList;
+
     }
 
 
