@@ -6,9 +6,9 @@ import os
 conn = psycopg2.connect(
     dbname="pokedex",
     user="postgres",
-    password="Po773rdb",
+    password="********",
     host="localhost",
-    port="5432"
+    port="*****"
 )
 cur = conn.cursor()
 

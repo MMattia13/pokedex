@@ -22,7 +22,7 @@ public class PokemonListController {
         app.post(apiVersionV1 + "/owned", ctx -> {
             String pokemonid = ctx.pathParam("pokemonid");
             String userid = ctx.attribute("userid");
-            pokemonListServices.insertPokemonListWanted( pokemonid, userid );
+            pokemonListServices.insertPokemonListOwned( pokemonid, userid );
             ctx.status(200).result("succes");
         });
     }
