@@ -1,5 +1,7 @@
 package com.pokedex;
 
+import com.pokedex.controller.PokemonController;
+import com.pokedex.controller.UserController;
 import com.pokedex.utility.DatabaseConnection;
 
 import io.javalin.Javalin;
@@ -14,10 +16,15 @@ public class App
                 (cors -> cors.add(it -> it.anyHost()));})
                 .start(8082);
         DatabaseConnection db = DatabaseConnection.getInstance();
-        System.out.println("Server is running on port 8001");
+
+        PokemonController pokemonController = new PokemonController();
+        pokemonController.registerRoutes(app);
+        UserController userController = new UserController();
+        userController.registerRoutes(app);
+
+
+        System.out.println("Server is running on port 8082");
     }
 }
 
-// StudentController studentController = new StudentController();
-// studentController.registerRoutes(app);
 

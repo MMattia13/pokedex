@@ -4,12 +4,13 @@ import com.pokedex.models.User;
 import com.pokedex.utility.DatabaseConnection;
 
 import java.sql.*;
+import java.util.UUID;
 
 public class UserDao {
 
     private Connection connection = DatabaseConnection.getInstance().getConnection();
 
-    public void addUser(User user) {
+    public User addUser(User user) {
 
         String insertAllUserSQL = "INSERT INTO public.utenti(\n" +
                 "            id, email, password, name, surname)\n" +
@@ -28,7 +29,30 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return user;
     }
 
-}
+    public User getUserByID (UUID id){
+        String getUserSQL = "SELECT * FROM user WHERE id = ? ";
+        User user = new User();
+        try {
+            Statement stm = connection.createStatement();
+            ResultSet rs = stm.executeQuery(getUserSQL);
+
+            user.setUuid(UUID.fromString(rs.getString("id")));
+            user.setEmail(rs.getString("email"));
+            user.setPassword(rs.getString("password"));
+            user.setName(rs.getString("name"));
+            user.setSurname(rs.getString("surname"));
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
+    }
+    }
+
+
+
 
