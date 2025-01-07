@@ -1,6 +1,5 @@
 package com.pokedex.dao;
 import com.pokedex.models.PokemonList;
-import com.pokedex.models.User;
 import com.pokedex.utility.DatabaseConnection;
 
 import java.sql.*;
@@ -9,7 +8,7 @@ public class PokemonListDao {
 
     private Connection connection = DatabaseConnection.getInstance().getConnection();
 
-    public void insertPokemonList(PokemonList pokemonList) {
+    public PokemonList insertPokemonList(PokemonList pokemonList) {
 
         String insertPokemonListSQL = "INSERT INTO public.pokemon_list(\n" +
                 "\tid, id_pokemon, id_utente, state)\n" +
@@ -27,6 +26,7 @@ public class PokemonListDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return pokemonList;
     }
 
 
