@@ -1,9 +1,9 @@
 import { Form } from "react-router-dom";
-import { Card } from "../components/ui/card";
+
 
 export default function Login() {
     return(
-     <Card>
+     <div>
             <h1>Login</h1>
             <Form>
                 <div>
@@ -16,7 +16,7 @@ export default function Login() {
                 </div>
                 <button type="submit">Login</button>
             </Form>
-     </Card>
+        </div>
     )
     };
   
