@@ -1,72 +1,26 @@
-import { Laptop, User } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
+
 
 export function Navbar() {
-    const { user, logout } = useAuth();
+    const user = null;
+
+    function logout(event: MouseEvent<HTMLButtonElement, MouseEvent>): void {
+        throw new Error("Function not implemented.");
+    }
 
     return (
         <nav className="border-b">
             <div className="flex h-16 items-center px-4">
-                <div className="flex items-center space-x-4">
-                    <Link to="/" className="font-semibold flex items-center gap-4">
-                        <User className="h-6 w-6" />
-                        User Management
-                    </Link>
-                    {/* <Link to="/" className="font-semibold">
-                        Home
-                    </Link>
-                    <Link to="/about" className="font-semibold">
-                        About
-                    </Link>
-                    <Link to="/contact" className="font-semibold">
-                        Contact
-                    </Link> */}
+                
+                <div className="flex-1">
+                    <Link to="/pokedex" className="text-2xl font-semibold">Pokedex</Link>
                 </div>
-                <div className="ml-auto flex items-center space-x-4">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Avatar>
-                                <AvatarImage
-                                    src="/placeholder.svg?height=32&width=32"
-                                    alt="@johndoe"
-                                />
-                                <AvatarFallback>
-                                    {`${user?.firstName.charAt(0)}${user?.lastName.charAt(0)}`.toUpperCase()}
-                                </AvatarFallback>
-                            </Avatar>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56" align="end" forceMount>
-                            <DropdownMenuLabel className="font-normal">
-                                <div className="flex flex-col space-y-1">
-                                    <p className="text-sm font-medium leading-none">{user?.firstName}</p>
-                                    <p className="text-xs leading-none text-muted-foreground">
-                                        {user?.email}
-                                    </p>
-                                </div>
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem>
-                                <User className="mr-2 h-4 w-4" />
-                                <span>Profile</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <Laptop className="mr-2 h-4 w-4" />
-                                <span>Dashboard</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem onClick={logout}>Log out</DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                <div>
+                    {user ? (
+                        <button onClick={logout} className="text-blue-500">Logout</button>
+                    ) : (
+                        <Link to="/login" className="text-blue-500">Login</Link>
+                    )}
                 </div>
             </div>
         </nav>
